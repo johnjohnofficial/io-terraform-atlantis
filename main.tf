@@ -8,7 +8,7 @@ provider "aws" {
 
 ## https://www.terraform.io/docs/providers/aws/r/instance.html
 resource "aws_instance" "sample" {
-  ami           = "ami-0986c2ac728528ac2"
+  ami           = "ami-02ed481668fbb20fd"
   instance_type = "t2.medium"  ## https://aws.amazon.com/pt/ec2/instance-types/
 }
 
