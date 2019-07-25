@@ -8,8 +8,9 @@ provider "google" {
 ## https://www.terraform.io/docs/providers/google/r/compute_instance.html
 resource "google_compute_instance" "sample" {
   name         = "sample"
-  machine_type = "f1-micro" ## https://cloud.google.com/compute/docs/machine-types
+  machine_type = "g1-small" ## https://cloud.google.com/compute/docs/machine-types
   zone         = "us-central1-a"
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
