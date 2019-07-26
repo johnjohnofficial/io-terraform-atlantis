@@ -23,8 +23,15 @@ resource "google_compute_instance" "sample" {
     network = "default"
 
     access_config {
-      // Ephemeral IP
+      nat_ip = "${google_compute_address.static.address}"
     }
   }
+}
+
+## https://www.terraform.io/docs/providers/google/r/compute_address.html
+resource "google_compute_address" "static" {
+  name          = "ipv4-address"
+  address_type  = "EXTERNAL"
+  region        = "us-central1"
 }
 
