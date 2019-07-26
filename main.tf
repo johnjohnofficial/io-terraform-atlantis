@@ -26,6 +26,8 @@ resource "google_compute_instance" "sample" {
       nat_ip = "${google_compute_address.static.address}"
     }
   }
+
+  depends_on = ["google_storage_bucket.insideout-tf"]
 }
 
 ## https://www.terraform.io/docs/providers/google/r/compute_address.html
@@ -35,3 +37,13 @@ resource "google_compute_address" "static" {
   region        = "us-central1"
 }
 
+## https://www.terraform.io/docs/providers/google/r/storage_bucket.html
+resource "google_storage_bucket" "insideout-tf" {
+  name                = "insideout-tf"
+  location            = "EU"
+
+  website {
+    main_page_suffix  = "index.html"
+    not_found_page    = "404.html"
+  }
+}
