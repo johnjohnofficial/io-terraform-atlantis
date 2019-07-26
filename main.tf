@@ -14,7 +14,7 @@ resource "google_compute_instance" "sample" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-minimal-1604-lts" ## https://cloud.google.com/compute/docs/images
+      image = "debian-cloud/debian-9" ## https://cloud.google.com/compute/docs/images
       size = 50
     }
   }
