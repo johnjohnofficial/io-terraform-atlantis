@@ -1,8 +1,8 @@
 ## https://www.terraform.io/docs/providers/google/index.html
 provider "google" {
   credentials = "${file("configs/gcp-sa.json")}"
-  project     = "vernal-tiger-247805"
-  region      = "us-central1"
+  project     = "${var.project}"
+  region      = "${var.project}"
 }
 
 resource "google_compute_firewall" "sample" {
@@ -34,14 +34,14 @@ resource "google_compute_firewall" "web" {
 ## https://www.terraform.io/docs/providers/google/r/compute_instance.html
 resource "google_compute_instance" "sample" {
   name         = "sample"
-  machine_type = "g1-small" ## https://cloud.google.com/compute/docs/machine-types
+  machine_type = "${var.machine_type}" ## https://cloud.google.com/compute/docs/machine-types
   zone         = "us-central1-a"
   allow_stopping_for_update = true
   tags         = ["externalssh"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9" ## https://cloud.google.com/compute/docs/images
+      image = "${var.image_boot}" ## https://cloud.google.com/compute/docs/images
       size = 50
     }
   }
@@ -86,7 +86,7 @@ resource "google_compute_instance" "sample" {
 resource "google_compute_address" "static" {
   name          = "ipv4-address"
   address_type  = "EXTERNAL"
-  region        = "us-central1"
+  region        = "${var.region}"
 }
 
 ## https://www.terraform.io/docs/providers/google/r/storage_bucket.html
